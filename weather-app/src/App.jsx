@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 //import reactLogo from './assets/react.svg'
 import './App.css'
+import { Today } from './components/Today';
+import WeekDay from './components/WeekDay';
 import { formatWeatherDataDaily } from './utils/formatWeatherDataDaily'
 
 function App() {
@@ -86,7 +88,19 @@ function App() {
     }
 
 
-  return <div className=""></div>;
-  
+  return (
+    <div className="">
+        <div>
+            <Today data ={weatherData[0]} weatherUnits={weatherUnits}/>
+            <div> 
+                {weatherData && 
+                weatherData
+                .slice(1, weatherData.length)
+                .map((data, index) => 
+                    <WeekDay key={index} data ={data} weatherUnits={weatherUnits}/>)}             // map sur les jours suivant => daily
+            </div>
+        </div>;
+    </div>
+  );
 }
 export default App
