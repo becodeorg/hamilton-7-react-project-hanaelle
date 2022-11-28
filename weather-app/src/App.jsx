@@ -5,8 +5,8 @@ import './App.css'
 function App() {
     const[isloading, setIsLoading] = useState(false); //  se voit attribuer une valeur mais n'est jamais utilisé.
     const[error, setError] = useState(false);  //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
-    const[geoLoc, setGeoLoc] = useState((latitude:  0, longitude: 0));  //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
-
+    const[geoLoc, setGeoLoc] = useState({latitude:  0, longitude: 0});  //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
+    const[weatherUnits, setWeatherUnits] = useState({})
     useEffect (() => {
         setIsLoading(true);
 
@@ -31,7 +31,7 @@ function App() {
                 }); 
             },
             () => {
-                setError(true);  // en cas d erreur faire ce call back 
+                setError(true); // en cas d erreur faire ce call back 
             }
         );  
     };
@@ -44,7 +44,16 @@ const fetchWeather = useCallback(async (url) => {
 
         if(object.keys(data).length == 0){
             setError(true);
-        } else    
+        } else{
+            // recupere les donnees jour par jour mais on va les formater
+            // recupere les unites (leve du soleil couche du soeil etc..on recupere ses donnees sur le site .)
+            setWeatherUnits({
+                rain: data.daily_units.precipitation_sun,
+                temperature: data.daily_units.temperature_2m_max,
+                wind: data.daily_units.windspeed_10m_max,
+            })
+        }    
+    
     }catch (error) {}
 },[]);
 
