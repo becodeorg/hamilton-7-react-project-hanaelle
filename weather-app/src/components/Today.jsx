@@ -35,12 +35,12 @@ if (!data || !weatherUnits){                                    // on verifie  d
       <div className="max-w-max mx-auto xl:ml-auto ">    {/*responsive avec marges diff pour chaque ecran */}
       <div className="flex mb-20 mt-12 flex-col xl:flex-row">    {/* mettre emojis et texte et donnees d uncote et le reste de l autre sur une colonne  */}
         <div className="flex flex-col">                           {/*aligner les emojis l un en desou de l autre */}
-          <div className=''> {WeatherEmojis} </div>
+          <div className="text-8xl mb-8 text-center xl:text-right"> {weatherEmojis} </div>
           <div className="text-3xl font-bold text-center text-white mt-auto mb-8 xl:mt-auto xl:mb-0">
             Aujourd'hui, {data.day}
           </div>
         </div>
-        <div>
+        <div className="text-xl ml-12 xl:pl-4 xl:border-l-2 xl:border-l-indigo-500">
           <p>
             {emojis.calendar} Jour : {data.day}
           </p>

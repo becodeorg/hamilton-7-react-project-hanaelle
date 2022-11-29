@@ -1,38 +1,36 @@
 import React, { useEffect, useState, useCallback} from 'react'
 //import reactLogo from './assets/react.svg'
-import './App.css'
+//import './App.css'
 import { Today } from './components/Today';
 import WeekDay from './components/WeekDay';
 import { formatWeatherDataDaily } from './utils/formatWeatherDataDaily'
 
 function App() {
+    //return<div className="app">Helloooooooooo</div>;
     const[isLoading, setIsLoading] = useState(false);                       //  se voit attribuer une valeur mais n'est jamais utilisé.
     const[error, setError] = useState(false);                              //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const[geoLoc, setGeoLoc] = useState({latitude:  0, longitude: 0});     //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const[weatherUnits, setWeatherUnits] = useState({});
     const[weatherData, setWeatherData] = useState([]);
     
-    const fetchWeather = useCallback(async (url) => {
+    const fetchWeather = useCallback(async (url) => {                   //usecallback permet d optimiser cette fonction et de la memorise avec les parametres sans devoir la recreer
         setError(false);
 
-        try {
+        try {                                                             // try catch permet de capter les erreurs quand on fait du fetch
             const res = await fetch (url);                                  //res => response => promesse
             const data = res.json();
 
             
             
             //console.log(data);
-            if (Object.keys(data).length === 0) {
+            if (Object.keys(data).length === 0) {                   //Objet permet de verifier si dans data il y une données, ex clés , les champs de data 
                 setError(true);
                 console.log("erreur 1");
-            } else {                        // recupere les donnees jour par jour mais on va les formater
+            } else {                                               // recupere les donnees jour par jour mais on va les formater
                 const formattedDailyData = formatWeatherDataDaily(data.daily);    
                 setWeatherData(formattedDailyData);
                     // recupere les unites (leve du soleil couche du soeil etc..on recupere ses donnees sur le site .)
-                
-                
-                
-                    setWeatherUnits({
+                setWeatherUnits({
                     rain: data.daily_units.precipitation_sum,
                     temperature: data.daily_units.temperature_2m_max,
                     wind: data.daily_units.windspeed_10m_max,
@@ -43,21 +41,20 @@ function App() {
     useEffect (() => {
         setIsLoading(true);
 
-        if(!navigator.geolocation) {                                         //pour veridier si le navigateur est compatible (! navigateur. geo ...) veut dire s il n exite pas ce sera pas possible del utiliser 
+        if(!navigator.geolocation) {                             //pour veridier si le navigateur est compatible (! navigateur. geo ...) veut dire s il n exite pas ce sera pas possible del utiliser 
             window.alert(
-            "votre naguation ne permet pas la géolocalisation pour utiliser cette application"//infome l utilisateur qu on peut pas lui donner cet indo
+            "votre navigation ne permet pas la géolocalisation pour utiliser cette application"             //infome l utilisateur qu on peut pas lui donner cet indo
             );
         }
     getGeoLocalisation();                                                 // ici on va recupere les donnes gps
-
-    fetchWeather(
-        `https://api.open-meteo.com/v1/forecast?latitude=${geoLoc.latitude}&longitude=${geoLoc.longitude}&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,windspeed_10m_max&timezone=Europe%2FLondon`
-    ).then(() => setIsLoading(false));
-
-    }, [fetchWeather, geoLoc.latitude, geoLoc.longitude]);
+        fetchWeather(
+            `https://api.open-meteo.com/v1/forecast?latitude=${geoLoc.latitude}&longitude=${geoLoc.longitude}&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,windspeed_10m_max&timezone=Europe%2FLondon`
+            ).then(() => setIsLoading(false));
+    }, 
+        [fetchWeather, geoLoc.latitude, geoLoc.longitude]);
 
     const getGeoLocalisation = () => {                                       //chercher les donnees gps
-        navigator.geolocation.getCurrentPosition(                            //cette fonction reponds en cas ed succes 
+        navigator.geolocation.getCurrentPosition(                            //cette fonction reponds en cas de succes 
             (position) => {
                 setGeoLoc({                                                 //si on reussi a avoir l info on aura acces a la lattitude et la longitude.ici (position.coords.latitude)le coords se trouve sur le site des coordonne 
                     latitude: position.coords.latitude, 
