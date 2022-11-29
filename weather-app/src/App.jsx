@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback} from 'react'
 //import reactLogo from './assets/react.svg'
 import './App.css'
 import { Today } from './components/Today';
@@ -6,7 +6,7 @@ import WeekDay from './components/WeekDay';
 import { formatWeatherDataDaily } from './utils/formatWeatherDataDaily'
 
 function App() {
-    const[isloading, setIsLoading] = useState(false);                       //  se voit attribuer une valeur mais n'est jamais utilisé.
+    const[isLoading, setIsLoading] = useState(false);                       //  se voit attribuer une valeur mais n'est jamais utilisé.
     const[error, setError] = useState(false);                              //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const[geoLoc, setGeoLoc] = useState({latitude:  0, longitude: 0});     //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const[weatherUnits, setWeatherUnits] = useState({});
@@ -91,13 +91,13 @@ function App() {
   return (
     <div className="">
         <div>
-            <Today data ={weatherData[0]} weatherUnits={weatherUnits}/>
+            <Today data ={weatherData[0]} weatherUnits={weatherUnits}/> 
             <div> 
                 {weatherData && 
                 weatherData
                 .slice(1, weatherData.length)
                 .map((data, index) => 
-                    <WeekDay key={index} data ={data} weatherUnits={weatherUnits}/>)}             // map sur les jours suivant => daily
+                    <WeekDay key={index} data ={data} weatherUnits={weatherUnits}/>)}             {/* map sur les jours suivant => daily*/}
             </div>
         </div>;
     </div>

@@ -11,7 +11,7 @@ const WeekDay = ({data, weatherUnits}) => {
     useEffect(() => {
         if(!data) return;
 
-    const avTemp = (
+    const avTemp = (                                            //calcule lamoyenne de temperature
         (data.temperature_2m_max + data.temperature_2m_min) / 
         2
         ).toFixed (1);                                      //calcul de la temperature moyenne,toFixed (1) donne 1 chiffre apres le virgule 
@@ -19,14 +19,24 @@ const WeekDay = ({data, weatherUnits}) => {
     const weatherEmojis = getEmojis(
     avTemp, 
     data.precipitation_sum, 
-    data.windspeed_10_max            //recupere les emogies de la meteo
+    data.windspeed_10_max                                           //recupere les emojies de la meteo
     );
+    //recupere les donnees et les manipuler
+    setAverageTemperature(avTemp);
+    setWeatherEmojis(weatherEmojis);
+},[data]);
 
-
-},[]);
-
-
-return <div>WeekDay</div>
+    if (!data || !weatherUnits){                                    // on verifie  donc SI jamais il n y pas de data et de weatherunits, on lui dira Erreur 
+    return <div> Erreur ...</div>;
+    }
+return <div>
+        <p>{data.day}</p>                                                 //les jours en francais
+        <p>{averageTemperature}<span> {weatherUnits.temperature}</span></p>          //degres et moyenne des temperature
+        <div>
+            {weatherEmojis && <div>{weatherEmojis}</div>}                           //afficher les emojis
+        </div>
+        
+        </div>
 };
 
 export default WeekDay
