@@ -21,7 +21,7 @@ function App() {
 
             
             
-            console.log(data);
+            //console.log(data);
             if (Object.keys(data).length === 0) {
                 setError(true);
             } else {                        // recupere les donnees jour par jour mais on va les formater
