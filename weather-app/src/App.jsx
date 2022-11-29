@@ -10,7 +10,7 @@ function App() {
     const[error, setError] = useState(false);                              //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const[geoLoc, setGeoLoc] = useState({latitude:  0, longitude: 0});     //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const[weatherUnits, setWeatherUnits] = useState({});
-    const [weatherData, setWeatherData] = useState([]);
+    const[weatherData, setWeatherData] = useState([]);
     
     const fetchWeather = useCallback(async (url) => {
         setError(false);
@@ -24,6 +24,7 @@ function App() {
             //console.log(data);
             if (Object.keys(data).length === 0) {
                 setError(true);
+                console.log("erreur 1");
             } else {                        // recupere les donnees jour par jour mais on va les formater
                 const formattedDailyData = formatWeatherDataDaily(data.daily);    
                 setWeatherData(formattedDailyData);

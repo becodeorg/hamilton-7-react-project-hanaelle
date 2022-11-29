@@ -24,16 +24,19 @@ export const Today = ({data, weatherUnits}) => {
 },[data]);
 
 if (!data || !weatherUnits){                                    // on verifie  donc SI jamais il n y pas de data et de weatherunits, on lui dira Erreur 
-    return <div> Aucune donées, Affichage impossible ...</div>;
+    return( <div className="text-2xl text-center text-red-500"> 
+      Aucune donées, Affichage impossible ...
+      </div>
+      );
     }
 
 
   return (
-    <div>
-      <div>
-        <div>
-          <div> WeatherEmojis </div>
-          <div>
+      <div className="max-w-max mx-auto xl:ml-auto ">    {/*responsive avec marges diff pour chaque ecran */}
+      <div className="flex mb-20 mt-12 flex-col xl:flex-row">    {/* mettre emojis et texte et donnees d uncote et le reste de l autre sur une colonne  */}
+        <div className="flex flex-col">                           {/*aligner les emojis l un en desou de l autre */}
+          <div className=''> {WeatherEmojis} </div>
+          <div className="text-3xl font-bold text-center text-white mt-auto mb-8 xl:mt-auto xl:mb-0">
             Aujourd'hui, {data.day}
           </div>
         </div>
