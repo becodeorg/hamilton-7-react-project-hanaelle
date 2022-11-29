@@ -16,7 +16,7 @@ export const Today = ({data, weatherUnits}) => {
     const weatherEmojis = getEmojis(
     avTemp, 
     data.precipitation_sum, 
-    data.windspeed_10_max                                           //recupere les emojies de la meteo
+    data.windspeed_10m_max                                           //recupere les emojies de la meteo
     );
     //recupere les donnees et les manipuler
     
@@ -32,7 +32,7 @@ if (!data || !weatherUnits){                                    // on verifie  d
     <div>
       <div>
         <div>
-          <div> {/*  EMOJI */} </div>
+          <div> WeatherEmojis </div>
           <div>
             Aujourd'hui, {data.day}
           </div>
@@ -45,12 +45,29 @@ if (!data || !weatherUnits){                                    // on verifie  d
             {emojis.rain} Pluie : {data.precipitation_sum} {weatherUnits.rain}
           </p>
           <p>
-            {emojis.sunrise} Lever du soleil : {formatDateToHoursMinutes(data.sunrise)} 
+            {emojis.sunrise} Lever du soleil : {" "} 
+            {formatDateToHoursMinutes(new Date (data.sunrise))} 
+          </p>
+          <p>
+            {emojis.sunrise} Coucher du soleil :{" "}
+            {formatDateToHoursMinutes(new Date (data.sunset))} 
+          </p>
+          <p>
+            {emojis.hot} Temperature Max : {data.precipitation_2m_max} {" "}
+            {weatherUnits.temperature}
+          </p>
+          <p>
+            {emojis.hot} Temperature Min : {data.precipitation_2m_min} {" "}
+            {weatherUnits.temperature}
+          </p>
+          <p>
+            {emojis.wind} Vent : {data.windspeed_10m_max} {" "}
+            {weatherUnits.wind}
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Today

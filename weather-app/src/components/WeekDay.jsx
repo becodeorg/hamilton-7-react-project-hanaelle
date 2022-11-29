@@ -19,7 +19,7 @@ const WeekDay = ({data, weatherUnits}) => {
     const weatherEmojis = getEmojis(
     avTemp, 
     data.precipitation_sum, 
-    data.windspeed_10_max                                           //recupere les emojies de la meteo
+    data.windspeed_10m_max                                           //recupere les emojies de la meteo
     );
     //recupere les donnees et les manipuler
     setAverageTemperature(avTemp);
