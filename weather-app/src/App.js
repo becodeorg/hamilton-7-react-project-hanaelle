@@ -71,36 +71,46 @@ function App() {
 //si c est en chargement
     if (isLoading) {
         return(
-            <div>
-                <p>Chargement ...</p>
+            <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">
+                <p className="text-center">Chargement ...</p>
             </div>
-        )
-        
+        );
     }
+
 //si il y a une erreur de chargement 
     if (error) {
-        return(
-            <div>
-                <p>Une erreur est survenue lors de la récuperation des previsions météo ...</p>
+        return (
+            <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">
+                <p className="text-center text-red-500">
+                    Une erreur est survenue lors de la récuperation des
+                    previsions météo ...
+                </p>
             </div>
-        )
+        );
         
     }
 
 
-  return (
-    <div className="">
-        <div>
-            <Today data ={weatherData[0]} weatherUnits={weatherUnits}/> 
-            <div> 
-                {weatherData && 
-                weatherData
-                .slice(1, weatherData.length)
-                .map((data, index) => 
-                    <WeekDay key={index} data ={data} weatherUnits={weatherUnits}/>)}             {/* map sur les jours suivant => daily*/}
+        return (
+            <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">
+                <div className="w-full max-w-7xl bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg shadow-lg p-4 md:px-12 md:py-8 xl:py-12 xl:px-28">
+                    <Today data={weatherData[0]} weatherUnits={weatherUnits} />
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-6">  // aligner les donnees en grid et repsonsive 1colonne avec espace de 6 carrés
+                        {weatherData &&
+                            weatherData
+                                .slice(1, weatherData.length)
+                                .map((data, index) => (
+                                    <WeekDay
+                                        key={index}
+                                        data={data}
+                                        weatherUnits={weatherUnits}
+                                    />
+                                ))}{" "}
+                        {/* map sur les jours suivant => daily*/}
+                    </div>
+                </div>
+                ;
             </div>
-        </div>;
-    </div>
-  );
+        );
 }
 export default App

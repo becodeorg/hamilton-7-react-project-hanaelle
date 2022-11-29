@@ -27,11 +27,12 @@ const WeekDay = ({data, weatherUnits}) => {
 },[data]);
 
     if (!data || !weatherUnits){                                    // on verifie  donc SI jamais il n y pas de data et de weatherunits, on lui dira Erreur 
-    return <div> Erreur ...</div>;
+    return <div className="text-2xl text-center text-red-500">Erreur ...</div>;
     }
-return <div>
-        <p>{data.day}</p>                                                 //les jours en francais
-        <p>{averageTemperature}<span> {weatherUnits.temperature}</span></p>          //degres et moyenne des temperature
+return <div className="text-center p-6 rounded-md bg-white/30 shadow-md flex justify-center items-center md:flex-col ">                                 //style: petite carre qui affiche temp, jour et emoji
+        <p className="text-lg font-bold md:mb-1">{data.day}</p>                                                 //les jours en francais
+        <p>
+            {averageTemperature}<span> {weatherUnits.temperature}</span></p>          //degres et moyenne des temperature
         <div>
             {weatherEmojis && <div>{weatherEmojis}</div>}                           //afficher les emojis
         </div>
