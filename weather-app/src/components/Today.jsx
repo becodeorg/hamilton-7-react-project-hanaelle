@@ -2,21 +2,22 @@ import React, {useEffect, useState} from "react";
 import {emojis} from "../utils/emojis";
 import {formatDateToHoursMinutes} from "../utils/formatDateToHoursMinutes";
 import {getEmojis} from "../utils/getEmojis";
-
-export const Today = ({data, weatherUnits}) => {
+const Today = ({data, weatherUnits}) => {
     const [weatherEmojis, setWeatherEmojis] = useState("");
     useEffect(() => {
         if (!data) return;
 
-        const avTemp = //calcule lamoyenne de temperature
-        ((data.temperature_2m_max + data.temperature_2m_min) / 2).toFixed(1); //calcul de la temperature moyenne,toFixed (1) donne 1 chiffre apres le virgule
+        const avTemp = //calcule la moyenne de temperature
+            ((data.temperature_2m_max + data.temperature_2m_min) / 2).toFixed(
+                1,
+            ); //calcul de la temperature moyenne,toFixed (1) donne 1 chiffre apres le virgule
 
         const weatherEmojis = getEmojis(
             avTemp,
             data.precipitation_sum,
             data.windspeed_10m_max, //recupere les emojies de la meteo
         );
-        //recupere les donnees et les manipuler
+        //recupère les donnees et les manipuler
 
         setWeatherEmojis(weatherEmojis);
     }, [data]);
@@ -25,7 +26,7 @@ export const Today = ({data, weatherUnits}) => {
         // on verifie  donc SI jamais il n y pas de data et de weatherunits, on lui dira Erreur
         return (
             <div className="text-2xl text-center text-red-500">
-                Aucune donées, Affichage impossible ...
+                Aucune données, Affichage impossible ...
             </div>
         );
     }

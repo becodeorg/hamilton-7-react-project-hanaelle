@@ -1,12 +1,11 @@
 import React, {useEffect, useState, useCallback} from "react";
 //import reactLogo from './assets/react.svg'
 //import './App.css'
-import {Today} from "./components/Today";
-import {WeekDay} from "./components/WeekDay";
+import Today from "./components/Today";
+import WeekDay from "./components/WeekDay";
 import {formatWeatherDataDaily} from "./utils/formatWeatherDataDaily";
 
 function App() {
-    //return<div className="app">Helloooooooooo</div>;
     const [isLoading, setIsLoading] = useState(false); //  se voit attribuer une valeur mais n'est jamais utilisé.
     const [error, setError] = useState(false); //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
     const [geoLoc, setGeoLoc] = useState({latitude: 0, longitude: 0}); //Une valeur est attribuée à l'erreur, mais elle n'est jamais utilisée.
@@ -14,15 +13,15 @@ function App() {
     const [weatherData, setWeatherData] = useState([]);
 
     const fetchWeather = useCallback(async (url) => {
-        //usecallback permet d optimiser cette fonction et de la memorise avec les parametres sans devoir la recreer
+        //usecallback permet d optimiser cette fonction et de la memorise avec les parametres sans devoir la recréer
         setError(false);
 
         try {
             // try catch permet de capter les erreurs quand on fait du fetch
             const res = await fetch(url); //res => response => promesse
-            const data = res.json();
+            const data = await res.json();
 
-            //console.log(data);
+            console.log(data);
             if (Object.keys(data).length === 0) {
                 //Objet permet de verifier si dans data il y une données, ex clés , les champs de data
                 setError(true);
@@ -44,7 +43,7 @@ function App() {
         setIsLoading(true);
 
         if (!navigator.geolocation) {
-            //pour veridier si le navigateur est compatible (! navigateur. geo ...) veut dire s il n exite pas ce sera pas possible del utiliser
+            //pour verifier si le navigateur est compatible (! navigateur. geo ...) veut dire s il n exite pas ce sera pas possible del utiliser
             window.alert(
                 "votre navigation ne permet pas la géolocalisation pour utiliser cette application", //infome l utilisateur qu on peut pas lui donner cet indo
             );
@@ -61,7 +60,7 @@ function App() {
             //cette fonction reponds en cas de succes
             (position) => {
                 setGeoLoc({
-                    //si on reussi a avoir l info on aura acces a la lattitude et la longitude.ici (position.coords.latitude)le coords se trouve sur le site des coordonne
+                    //si on réussi a avoir l info on aura acces a la lattitude et la longitude.ici (position.coords.latitude)le coords se trouve sur le site des coordonne
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 });
@@ -98,8 +97,8 @@ function App() {
                 <Today data={weatherData[0]} weatherUnits={weatherUnits} />
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3 xl:grid-cols-6">
                     {" "}
-                    // aligner les donnees en grid et repsonsive 1colonne avec
-                    espace de 6 carrés
+                    {/* // aligner les donnees en grid et repsonsive 1colonne avec
+                    espace de 6 carrés */}
                     {weatherData &&
                         weatherData
                             .slice(1, weatherData.length)
