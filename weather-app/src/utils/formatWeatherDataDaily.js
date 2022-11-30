@@ -1,4 +1,5 @@
 export const formatWeatherDataDaily = (data) => {
+    console.log(data);
     // ici j exporte le tableau qui correspont au jour de la semaien avec chaque unite (temp, degres, vent etc...)
     const dataDaily = []; //tableau vide qui reprend les jours de la semaine
 
@@ -24,7 +25,6 @@ export const formatWeatherDataDaily = (data) => {
     //     data.day = frenchDays[dayIndex];
     // });
 
-    
     return dataDaily;
 };
 

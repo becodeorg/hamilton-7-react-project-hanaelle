@@ -69,7 +69,7 @@ function App() {
         );
     };
     //si c est en chargement
-    if (isLoading) {
+    if (isLoading === true) {
         return (
             <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">
                 <p className="text-center">Chargement ...</p>
