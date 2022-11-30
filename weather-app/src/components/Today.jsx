@@ -5,8 +5,9 @@ import {getEmojis} from "../utils/getEmojis";
 const Today = ({data, weatherUnits}) => {
     const [weatherEmojis, setWeatherEmojis] = useState("");
     useEffect(() => {
-        if (!data) return;
-
+        if (!data) {
+            return;
+        }
         const avTemp = //calcule la moyenne de temperature
             ((data.temperature_2m_max + data.temperature_2m_min) / 2).toFixed(
                 1,
@@ -24,6 +25,8 @@ const Today = ({data, weatherUnits}) => {
 
     if (!data || !weatherUnits) {
         // on verifie  donc SI jamais il n y pas de data et de weatherunits, on lui dira Erreur
+        
+
         return (
             <div className="text-2xl text-center text-red-500">
                 Aucune données, Affichage impossible ...

@@ -6,7 +6,7 @@ const WeekDay = ({data, weatherUnits}) => {
     const [weatherEmojis, setWeatherEmojis] = useState("");
     const [averageTemperature, setAverageTemperature] = useState(0);
 
-    console.log(data);
+    //console.log(data);
 
     useEffect(() => {
         if (!data) return;
@@ -37,8 +37,7 @@ const WeekDay = ({data, weatherUnits}) => {
         <div className="text-center p-6 rounded-md bg-white/30 shadow-md flex justify-center items-center md:flex-col ">
             {" "}
             {/* //style: petite carre qui affiche temps, jour et émoji */}
-            <p className="text-lg font-bold md:mb-1">{data.day}</p> //les jours
-            en francais
+            <p className="text-lg font-bold md:mb-1">{data.day}</p> {/*//les jours en francais*/}
             <p className="ml-6 md:mb-4 md:ml-0">
                 {averageTemperature}
                 <span className="text-xs font-semibold">
@@ -48,7 +47,7 @@ const WeekDay = ({data, weatherUnits}) => {
                 </span>
             </p>
             <div className="ml-6 text-4xl md:ml-0">
-                {weatherEmojis && <div>{weatherEmojis}</div>} 
+                {weatherEmojis && <div>{weatherEmojis}</div>}
                 {/* //afficher les emojis */}
             </div>
         </div>

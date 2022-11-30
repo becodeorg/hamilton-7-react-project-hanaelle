@@ -21,16 +21,14 @@ function App() {
             const res = await fetch(url); //res => response => promesse
             const data = await res.json();
 
-            console.log(data);
             if (Object.keys(data).length === 0) {
                 //Objet permet de verifier si dans data il y une données, ex clés , les champs de data
                 setError(true);
-                console.log("erreur 1");
             } else {
                 // recupere les donnees jour par jour mais on va les formater
                 const formattedDailyData = formatWeatherDataDaily(data.daily);
                 setWeatherData(formattedDailyData);
-                // recupere les unites (leve du soleil couche du soeil etc..on recupere ses donnees sur le site .)
+                // recupere les unités (leve du soleil couche du soeil etc..on recupere ses donnees sur le site .)
                 setWeatherUnits({
                     rain: data.daily_units.precipitation_sum,
                     temperature: data.daily_units.temperature_2m_max,
@@ -80,16 +78,17 @@ function App() {
     }
 
     //si il y a une erreur de chargement
-    if (error) {
-        return (
-            <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">
-                <p className="text-center text-red-500">
-                    Une erreur est survenue lors de la récuperation des
-                    previsions météo ...
-                </p>
-            </div>
-        );
-    }
+    // if (error) {
+    //     return (
+    //         <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">
+    //             <p className="text-center text-red-500">
+    //                 Une erreur est survenue lors de la récuperation des
+    //                 previsions météo ...
+    //             </p>
+    //         </div>
+    //     );
+    // }
+    
 
     return (
         <div className="min-h-screen h-max bg-cyan-600 flex justify-center items-start p-8 md:px-20">

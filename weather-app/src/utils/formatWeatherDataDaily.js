@@ -15,12 +15,16 @@ export const formatWeatherDataDaily = (data) => {
             dataDaily[i][key] = dayValue; // placer la donnee du jour de l objet qui correspont au jour en question
         }
     });
-    dataDaily.forEach((data) => {
-        // jour en Francais
-        const date = newDate(date.time);
-        const dayIndex = date.getDay(); // renvois un index avc 0 pour dimache 1 lundi etc...6 pour samedi
-        data.day = frenchDays[dayIndex];
-    });
+    // dataDaily.forEach((data) => {
+
+    //     const date = newDate(date.time);
+
+    //     const dayIndex = date.getDay(); // renvois un index avc 0 pour dimache 1 lundi etc...6 pour samedi
+
+    //     data.day = frenchDays[dayIndex];
+    // });
+
+    
     return dataDaily;
 };
 
